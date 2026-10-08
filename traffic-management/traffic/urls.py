@@ -27,6 +27,7 @@ from .views import run_migrations
 
 def db_info(request):
     try:
+        from django.http import JsonResponse
         from django.conf import settings
         return JsonResponse({'engine': settings.DATABASES['default']['ENGINE']})
     except Exception as e:
