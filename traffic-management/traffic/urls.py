@@ -29,7 +29,12 @@ def db_info(request):
     try:
         from django.http import JsonResponse
         from django.conf import settings
-        return JsonResponse({'engine': settings.DATABASES['default']['ENGINE']})
+        import os
+        return JsonResponse({
+            'engine': settings.DATABASES['default']['ENGINE'],
+            'has_db_url': 'DATABASE_URL' in os.environ,
+            'db_url_value': os.environ.get('DATABASE_URL')
+        })
     except Exception as e:
         import traceback
         return JsonResponse({'error': str(e), 'trace': traceback.format_exc()}, status=500)
