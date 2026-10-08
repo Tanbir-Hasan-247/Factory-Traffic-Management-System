@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Settings, Server } from "lucide-react";
 import axios from "axios";
 
-const API_BASE = "http://localhost:8000/api";
+const API_BASE = "https://factory-traffic-management-system-phi.vercel.app/api";
 
 export function SimulationControls({
   simulateVehicle,
