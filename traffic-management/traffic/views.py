@@ -155,3 +155,21 @@ class ControllerCommandViewSet(viewsets.ReadOnlyModelViewSet):
     )
 
     serializer_class = ControllerCommandSerializer
+
+
+from django.http import JsonResponse
+
+from django.core.management import call_command
+
+def run_migrations(request):
+
+    try:
+
+        call_command('migrate')
+
+        return JsonResponse({'status': 'Migrated successfully!'})
+
+    except Exception as e:
+
+        return JsonResponse({'status': 'Failed', 'error': str(e)}, status=500)
+

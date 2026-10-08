@@ -23,6 +23,9 @@ router.register(
     r"controller-commands", ControllerCommandViewSet, basename="controller-command"
 )
 
+from .views import run_migrations
+
 urlpatterns = [
+    path("migrate/", run_migrations),
     path("", include(router.urls)),
 ]
