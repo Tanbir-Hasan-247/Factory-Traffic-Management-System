@@ -1,6 +1,14 @@
-# Smart Traffic Management System
+# Smart Traffic Management System 🚦
 
 A robust, real-time traffic light management system simulation built with **Django REST Framework** (Backend) and **React + Vite** (Frontend). This system manages complex intersection states, prioritizes emergency vehicles, avoids starvation, and guarantees safety invariants (e.g., conflicting directions cannot be GREEN simultaneously).
+
+## 🚀 Live Demo
+
+- **Frontend Application:** [https://factory-traffic-management-system-d-two.vercel.app/](https://factory-traffic-management-system-d-two.vercel.app/)
+- **Backend API:** [https://factory-traffic-management-system-phi.vercel.app/api/](https://factory-traffic-management-system-phi.vercel.app/api/)
+
+> **Note on Automatic Mode in Live Environment:**
+> The Vercel backend hosts the REST API and connects to a Supabase PostgreSQL database. However, for the **Automatic** traffic light switching to function continuously without human intervention, the background daemon `run_engine` must be running. Since Vercel is a serverless platform, it cannot host background processes. To enable fully automatic mode, you must either run the engine locally pointing to your Supabase database, or host the backend on a persistent platform (like Render or Railway).
 
 ## Architecture Overview
 
@@ -20,11 +28,12 @@ A robust, real-time traffic light management system simulation built with **Djan
   * `DEGRADED`: Fallback mode triggered when physical controllers fail to ACK within the timeout threshold, or when an unsafe state is detected.
 * **Controller Timeout Recovery:** If the frontend simulation (hardware) takes too long to acknowledge a signal command, the backend engine flags the junction as `DEGRADED` and awaits system recovery.
 
-## Getting Started
+## Getting Started (Local Development)
 
 ### Prerequisites
 * Python 3.9+
 * Node.js 18+
+* PostgreSQL (or fallback to SQLite locally)
 
 ### 1. Start the Backend Server
 
@@ -61,6 +70,7 @@ The application will be available at `http://localhost:5173/`.
 * **Controller Syncing:** The backend engine won't execute queue calculations unless the physical controller's state is fully synchronized and `ONLINE`.
 
 ## Technologies Used
-* **Backend:** Django, Django REST Framework, SQLite (default)
+* **Backend:** Django, Django REST Framework, PostgreSQL (Supabase)
 * **Frontend:** React, Vite, Tailwind CSS (or standard CSS modules)
+* **Deployment:** Vercel (Frontend & Backend API)
 * **Code Quality:** Formatted using `black` (Python) and `prettier` (JavaScript).
