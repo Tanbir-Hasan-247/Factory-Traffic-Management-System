@@ -7,7 +7,8 @@ import { JunctionVisual } from "./components/JunctionVisual";
 import { SimulationControls } from "./components/SimulationControls";
 import { HistoryList } from "./components/HistoryList";
 
-const API_BASE = "http://localhost:8000/api";
+// const API_BASE = "http://localhost:8000/api";
+const API_BASE = "https://factory-traffic-management-system-phi.vercel.app/api";
 
 function App() {
   const [junction, setJunction] = useState(null);
