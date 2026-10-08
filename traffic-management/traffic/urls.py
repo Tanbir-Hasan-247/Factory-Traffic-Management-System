@@ -26,8 +26,12 @@ router.register(
 from .views import run_migrations
 
 def db_info(request):
-    from django.conf import settings
-    return JsonResponse({'engine': settings.DATABASES['default']['ENGINE']})
+    try:
+        from django.conf import settings
+        return JsonResponse({'engine': settings.DATABASES['default']['ENGINE']})
+    except Exception as e:
+        import traceback
+        return JsonResponse({'error': str(e), 'trace': traceback.format_exc()}, status=500)
 
 urlpatterns = [
     path("migrate/", run_migrations),
